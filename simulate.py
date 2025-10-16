@@ -1,7 +1,18 @@
-from simulation import SIMULATION
 
-simulation = SIMULATION()
+from simulation import SIMULATION
+import sys
+
+# Read direct/GUI mode from the first command-line argument if provided.
+# The script is commonly invoked as: python simulate.py <DIRECT|GUI>
+# Fall back to 'GUI' when no argument is supplied to avoid IndexError.
+if len(sys.argv) > 1:
+	directOrGUI = sys.argv[1]
+else:
+	directOrGUI = 'GUI'
+
+simulation = SIMULATION(directOrGUI)
 simulation.Run()
+simulation.Get_Fitness()
 
 # import constants as c
 # import numpy as np
