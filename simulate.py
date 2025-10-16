@@ -2,11 +2,19 @@
 from simulation import SIMULATION
 import sys
 
-# Read direct/GUI mode from the first command-line argument if provided.
-# The script is commonly invoked as: python simulate.py <DIRECT|GUI>
-# Fall back to 'GUI' when no argument is supplied to avoid IndexError.
+# Robustly read the direct/GUI mode from command-line arguments.
+# Expected invocation: python simulate.py <DIRECT|GUI>
+# If no argument is provided, default to 'GUI'. Normalize common values.
 if len(sys.argv) > 1:
-	directOrGUI = sys.argv[1]
+	directOrGUI = str(sys.argv[1]).upper()
+	# Accept a few common synonyms
+	if directOrGUI in ("D", "HEADLESS", "1", "TRUE"):
+		directOrGUI = "DIRECT"
+	elif directOrGUI in ("G", "WINDOW", "0", "FALSE"):
+		directOrGUI = "GUI"
+	elif directOrGUI not in ("DIRECT", "GUI"):
+		# Unknown value -> fallback to GUI
+		directOrGUI = "GUI"
 else:
 	directOrGUI = 'GUI'
 
