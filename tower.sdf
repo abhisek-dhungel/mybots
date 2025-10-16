@@ -1,0 +1,254 @@
+<sdf version="1.6">
+  <world name="default">
+    <model name="Block0">
+      <static>false</static>
+      <link name="Block0Link">
+        <pose>0 0 0.5 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>1 1 1</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>1 1 1</size></box>
+          </geometry>
+        </visual>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.16666667</ixx>
+            <iyy>0.16666667</iyy>
+            <izz>0.16666667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+    <model name="Block1">
+      <static>false</static>
+      <link name="Block1Link">
+        <pose>0 0 1.35 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.9 0.9 0.9</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.9 0.9 0.9</size></box>
+          </geometry>
+        </visual>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.16666667</ixx>
+            <iyy>0.16666667</iyy>
+            <izz>0.16666667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+    <model name="Block2">
+      <static>false</static>
+      <link name="Block2Link">
+        <pose>0 0 2.0250000000000004 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.81 0.81 0.81</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.81 0.81 0.81</size></box>
+          </geometry>
+        </visual>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.16666667</ixx>
+            <iyy>0.16666667</iyy>
+            <izz>0.16666667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+    <model name="Block3">
+      <static>false</static>
+      <link name="Block3Link">
+        <pose>0 0 2.5515000000000003 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.7290000000000001 0.7290000000000001 0.7290000000000001</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.7290000000000001 0.7290000000000001 0.7290000000000001</size></box>
+          </geometry>
+        </visual>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.16666667</ixx>
+            <iyy>0.16666667</iyy>
+            <izz>0.16666667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+    <model name="Block4">
+      <static>false</static>
+      <link name="Block4Link">
+        <pose>0 0 2.9524500000000007 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.6561000000000001 0.6561000000000001 0.6561000000000001</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.6561000000000001 0.6561000000000001 0.6561000000000001</size></box>
+          </geometry>
+        </visual>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.16666667</ixx>
+            <iyy>0.16666667</iyy>
+            <izz>0.16666667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+    <model name="Block5">
+      <static>false</static>
+      <link name="Block5Link">
+        <pose>0 0 3.2476950000000007 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.5904900000000002 0.5904900000000002 0.5904900000000002</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.5904900000000002 0.5904900000000002 0.5904900000000002</size></box>
+          </geometry>
+        </visual>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.16666667</ixx>
+            <iyy>0.16666667</iyy>
+            <izz>0.16666667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+    <model name="Block6">
+      <static>false</static>
+      <link name="Block6Link">
+        <pose>0 0 3.4543665000000012 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.5314410000000002 0.5314410000000002 0.5314410000000002</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.5314410000000002 0.5314410000000002 0.5314410000000002</size></box>
+          </geometry>
+        </visual>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.16666667</ixx>
+            <iyy>0.16666667</iyy>
+            <izz>0.16666667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+    <model name="Block7">
+      <static>false</static>
+      <link name="Block7Link">
+        <pose>0 0 3.587226750000001 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.47829690000000014 0.47829690000000014 0.47829690000000014</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.47829690000000014 0.47829690000000014 0.47829690000000014</size></box>
+          </geometry>
+        </visual>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.16666667</ixx>
+            <iyy>0.16666667</iyy>
+            <izz>0.16666667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+    <model name="Block8">
+      <static>false</static>
+      <link name="Block8Link">
+        <pose>0 0 3.658971285000001 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.43046721000000016 0.43046721000000016 0.43046721000000016</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.43046721000000016 0.43046721000000016 0.43046721000000016</size></box>
+          </geometry>
+        </visual>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.16666667</ixx>
+            <iyy>0.16666667</iyy>
+            <izz>0.16666667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+    <model name="Block9">
+      <static>false</static>
+      <link name="Block9Link">
+        <pose>0 0 3.6804946455000014 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.38742048900000015 0.38742048900000015 0.38742048900000015</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.38742048900000015 0.38742048900000015 0.38742048900000015</size></box>
+          </geometry>
+        </visual>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.16666667</ixx>
+            <iyy>0.16666667</iyy>
+            <izz>0.16666667</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+  </world>
+</sdf>
