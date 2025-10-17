@@ -3,12 +3,14 @@ import constants as c
 import copy
 
 
-class HILL_CLIMBER:
+class HILL_ClIMBER():
     def __init__(self):
         self.parent = SOLUTION()
 
     def Evolve(self):
-        self.parent.Evaluate("DIRECT")
+        self.parent.Evaluate("GUI")
+
+        # Evolve
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation()
 
@@ -19,6 +21,9 @@ class HILL_CLIMBER:
         self.Print()
         self.Select()
 
+    def Show_Best(self):
+        self.parent.Evaluate("GUI")
+
     def Spawn(self):
         self.child = copy.deepcopy(self.parent)
 
@@ -26,11 +31,9 @@ class HILL_CLIMBER:
         self.child.Mutate()
 
     def Select(self):
-        if (self.parent.fitness < self.child.fitness):
+        if (self.parent.fitness > self.child.fitness):
             self.parent = self.child
 
     def Print(self):
-        print("" + str(self.parent.fitness) + ", " + str(self.child.fitness))
-
-    def Show_Best(self):
-        self.parent.Evaluate("GUI")
+        print(
+            f"\n\nPARENT FITNESS: {self.parent.fitness}, CHILD FITNESS: {self.child.fitness}\n")

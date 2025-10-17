@@ -51,7 +51,9 @@ def Get_Touch_Sensor_Value_For_Link(linkName):
 
     desiredLinkIndex = linkNamesToIndices[linkName]
 
-    pts = p.getContactPoints()
+    pts = None
+    while pts is None:
+        pts = p.getContactPoints()
 
     for pt in pts:
 
@@ -101,7 +103,7 @@ def Prepare_Joint_Dictionary(bodyID):
 
         jointInfo = p.getJointInfo(bodyID, jointIndex)
 
-        jointName = jointInfo[1].decode('UTF-8')
+        jointName = jointInfo[1]
 
         jointNamesToIndices[jointName] = jointIndex
 
@@ -113,7 +115,7 @@ def Prepare_To_Simulate(bodyID):
     Prepare_Joint_Dictionary(bodyID)
 
 
-def Send_Cube(name="default", pos=[0, 0, 0], size=[1, 1, 1]):
+def Send_Cube(name="default", pos=[0, 0, 0], size=[1, 1, 1], mass=1.0, colorString="0 1.0 1.0 1.0", colorName="Cyan"):
 
     global availableLinkIndex
 
@@ -123,11 +125,11 @@ def Send_Cube(name="default", pos=[0, 0, 0], size=[1, 1, 1]):
 
         Start_Model(name, pos)
 
-        link = LINK_SDF(name, pos, size)
+        link = LINK_SDF(name, pos, size, mass)
 
         links.append(link)
     else:
-        link = LINK_URDF(name, pos, size)
+        link = LINK_URDF(name, pos, size, colorString, colorName)
 
         links.append(link)
 
@@ -142,11 +144,11 @@ def Send_Cube(name="default", pos=[0, 0, 0], size=[1, 1, 1]):
     availableLinkIndex = availableLinkIndex + 1
 
 
-def Send_Joint(name, parent, child, type, position):
+def Send_Joint(name, parent, child, type, position, jointAxis, rpy=0):
 
-    joint = JOINT(name, parent, child, type, position)
+    joint = JOINT(name, parent, child, type, position, rpy)
 
-    joint.Save(f)
+    joint.Save(f, jointAxis)
 
 
 def Send_Motor_Neuron(name, jointName):
@@ -159,6 +161,10 @@ def Send_Sensor_Neuron(name, linkName):
 
     f.write('    <neuron name = "' + str(name) +
             '" type = "sensor" linkName = "' + linkName + '" />\n')
+
+
+def Send_Hidden_Neuron(name):
+    f.write('    <neuron name = "' + str(name) + '" type = "hidden" />\n')
 
 
 def Send_Synapse(sourceNeuronName, targetNeuronName, weight):

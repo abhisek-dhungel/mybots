@@ -1,52 +1,47 @@
-import constants as c
-import numpy as np
+from world import WORLD
+from robot import ROBOT
 import pybullet as p
 import pybullet_data
 import pyrosim.pyrosim as pyrosim
 import time
-import math
-import random
-
-from world import WORLD
-from robot import ROBOT
+import constants as c
 
 
 class SIMULATION:
-    def __init__(self, directOrGUI):
+    def __init__(self, directOrGUI, solutionID):
+
+        # direct or GUI flow
         self.directOrGUI = directOrGUI
-        if (self.directOrGUI == "DIRECT"):
+
+        if self.directOrGUI == "DIRECT":
             self.physicsClient = p.connect(p.DIRECT)
-        else:
+        elif self.directOrGUI == "GUI":
             self.physicsClient = p.connect(p.GUI)
+            p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
+
+        # loads files like plane.urdf
+        p.setAdditionalSearchPath(pybullet_data.getDataPath())
+
+        # set gravity
+        p.setGravity(0, 0, -9.8)
+
         self.world = WORLD()
-        self.robot = ROBOT()
+        self.robot = ROBOT(solutionID)
 
     def Run(self):
-        for t in range(1000):
-            # print(t)
-            time.sleep(1/60)
+        for i in range(c.steps):
+            # c.steps inside the physics world for a small amount
             p.stepSimulation()
-            self.robot.Sense(t)
-            self.robot.Think()
-            self.robot.Act(t)
 
-    def __del__(self):
-        p.disconnect()
+            self.robot.Sense(i)
+            self.robot.Think()
+            self.robot.Act(i)
+
+            if self.directOrGUI == "GUI":
+                time.sleep(1/60)
 
     def Get_Fitness(self):
         self.robot.Get_Fitness()
 
-        # pyrosim.Set_Motor_For_Joint(
-        #     bodyIndex=robotId,
-        #     jointName='Torso_BackLeg',
-        #     controlMode=p.POSITION_CONTROL,
-        #     targetPosition=backTargetAngles[x],
-        #     maxForce=c.force
-        # )
-        # pyrosim.Set_Motor_For_Joint(
-        #     bodyIndex=robotId,
-        #     jointName='Torso_FrontLeg',
-        #     controlMode=p.POSITION_CONTROL,
-        #     targetPosition=frontTargetAngles[x],
-        #     maxForce=c.force
-        # )
+    def __del__(self):
+        p.disconnect()

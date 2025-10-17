@@ -1,18 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-backLegSensorValues = np.load('data/backLegSensorValues.npy')
-backTargetAngles = np.load('data/backTargetAngles.npy')
-frontLegSensorValues = np.load('data/frontLegSensorValues.npy')
-frontTargetAngles = np.load('data/frontTargetAngles.npy')
+backLegSensorValues = np.load("data/backLegSensorValues.npy")
+frontLegSensorValues = np.load("data/frontLegSensorValues.npy")
+targetAngles = np.load("data/targetAngles.npy")
 
-plt.figure(0)
-plt.plot(backLegSensorValues, label="Back Leg Data", linewidth=5)
-plt.plot(frontLegSensorValues, label="Front Leg Data")
+# plot data
+# backLegLine = plt.plot(backLegSensorValues, label="Back Leg", linewidth=4)
+# frontLegLine = plt.plot(frontLegSensorValues, label="Front Leg", linewidth=1)
+# plt.legend()
+# plt.show()
 
-plt.figure(1)
-plt.plot(backTargetAngles, label="Back Leg Target Angles", linewidth=4)
-plt.plot(frontTargetAngles, label="Front Leg Target Angles")
-
-plt.legend()
+plt.plot(targetAngles, label="Target Angles", linewidth=4)
 plt.show()

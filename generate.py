@@ -1,35 +1,60 @@
 import pyrosim.pyrosim as pyrosim
 import random
 
-length = 1
-width = 1
-height = 1
-x = 0
-y = 0
-z = 1.5
-n = 0
 
-# [z,x,y]
+def Create_World():
+    # use pyrosim to generate a link
+    # tells pyrosim the name of the file where information about the world should be stored
+    pyrosim.Start_SDF("world.sdf")
+    pyrosim.Send_Cube(name="Box",
+                      pos=[3, 4, .5], size=[1, 1, 1])
+    # closes the file
+    pyrosim.End()
+
+
+def Create_Robot():
+    # URDF body is used to describe a robot
+    pyrosim.Start_URDF("body.urdf")
+    # all URDF files must describe robot in a tree structure (root link + joints)
+    pyrosim.Send_Cube(name="Link0",
+                      pos=[0, 0, .5], size=[1, 1, 1])
+    pyrosim.Send_Joint(name="Link0_Link1", parent="Link0",
+                       child="Link1", type="revolute", position=[0, 0, 1], jointAxis="1 0 0")
+    pyrosim.Send_Cube(name="Link1", pos=[0, 0, .5], size=[1, 1, 1])
+    pyrosim.Send_Joint(name="Link1_Link2", parent="Link1",
+                       child="Link2", type="revolute", position=[0, 0, 1], jointAxis="1 0 0")
+    pyrosim.Send_Cube(name="Link2", pos=[0, 0, .5], size=[1, 1, 1])
+    pyrosim.Send_Joint(name="Link2_Link3", parent="Link2",
+                       child="Link3", type="revolute", position=[0, .5, .5], jointAxis="1 0 0")
+    pyrosim.Send_Cube(name="Link3", pos=[0, .5, 0], size=[1, 1, 1])
+    pyrosim.End()
+
+
+def Create_Link_Joint_Robot():
+    pyrosim.Start_URDF("body.urdf")
+
+    # create Torso (root link)
+    pyrosim.Send_Cube(name="Torso", pos=[0, 0, 1.5], size=[1, 1, 1])
+
+    # Front Leg
+    pyrosim.Send_Joint(name="Torso_FrontLeg", parent="Torso",
+                       child="FrontLeg", type="revolute", position=[.5, 0, 1], jointAxis="1 0 0")
+
+    # create FrontLeg
+    pyrosim.Send_Cube(name="FrontLeg", pos=[.5, 0, -.5], size=[1, 1, 1])
+
+    pyrosim.Send_Joint(name="Torso_BackLeg", parent="Torso",
+                       child="BackLeg", type="revolute", position=[-.5, 0, 1], jointAxis="1 0 0")
+    # create BackLeg
+    pyrosim.Send_Cube(name="BackLeg", pos=[-.5, 0, -.5], size=[1, 1, 1])
+
+    # create joints
+    pyrosim.End()
 
 
 def Generate_Body():
-    pyrosim.Start_URDF("body.urdf")
-    pyrosim.Send_Cube(name="Torso", pos=[x, y, z], size=[
-        length, width, height])
-
-    pyrosim.Send_Joint(name="Torso_BackLeg", parent="Torso",
-                       child="BackLeg", type="revolute", position=[0.5, 0, 1])
-
-    pyrosim.Send_Cube(
-        name="BackLeg", pos=[0.5, 0, -0.5], size=[length, width, height])
-
-    pyrosim.Send_Joint(name="Torso_FrontLeg", parent="Torso",
-                       child="FrontLeg", type="revolute", position=[-0.5, 0, 1])
-
-    pyrosim.Send_Cube(
-        name="FrontLeg", pos=[-0.5, 0, -0.5], size=[length, width, height])
-
-    pyrosim.End()
+    Create_Link_Joint_Robot()
+    # Create_Robot()
 
 
 def Generate_Brain():
@@ -40,23 +65,12 @@ def Generate_Brain():
     pyrosim.Send_Motor_Neuron(name=3, jointName="Torso_BackLeg")
     pyrosim.Send_Motor_Neuron(name=4, jointName="Torso_FrontLeg")
 
-    # pyrosim.Send_Synapse(sourceNeuronName=0, targetNeuronName=3, weight=2.0)
-    # pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=3, weight=1.0)
-    # pyrosim.Send_Synapse(sourceNeuronName=0, targetNeuronName=4, weight=0.5)
-    # pyrosim.Send_Synapse(sourceNeuronName=2, targetNeuronName=4, weight=1.0)
-
-    for i in range(3):
-        for j in range(3, 5):
-            pyrosim.Send_Synapse(
-                sourceNeuronName=i, targetNeuronName=j, weight=random.uniform(-1, 1))
-
-    pyrosim.End()
+    for sensor in range(3):
+        for motor in range(3, 5):
+            pyrosim.Send_Synapse(sourceNeuronName=sensor,
+                                 targetNeuronName=motor, weight=random.uniform(-1, 1))
 
 
+Create_World()
 Generate_Body()
-
 Generate_Brain()
-
-
-# green line x
-# red line z

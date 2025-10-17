@@ -1,16 +1,31 @@
 import numpy as np
+# Description: This file contains all the constants used in the simulation
+steps = 1000
 
-backLegAmplitude = np.pi/3
-backLegFrequency = 60
-backLegPhaseOffset = 2*np.pi
+# Backleg target angles
+amplitude = np.pi/4
+frequency = 5
+phaseOffset = np.pi/2
 
-frontLegAmplitude = np.pi/3
-frontLegFrequency = 120
-frontLegPhaseOffset = 2*np.pi
+# Frontleg target angles
+FrontLeg_amplitude = np.pi/3
+FrontLeg_frequency = 5
+FrontLeg_phaseOffset = 0
 
-LegAmplitude = np.pi/3
-LegFrequency = 200
-LegPhaseOffset = 2*np.pi
+# Evolution and Hillclimbing
+numberOfGenerations = 500
+populationSize = 10
 
-force = 50
-numberOfGenerations = 10
+# Parameterization
+numSensorNeurons = 3
+numMotorNeurons = 7
+numHiddenNeurons = 4
+motorJointRange = 1.2
+
+# Snake
+maxLinks = 4
+minLinks = 2
+
+# Testing
+testBody = True
+seed = 1

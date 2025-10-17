@@ -1,11 +1,15 @@
-
 from simulation import SIMULATION
 import sys
 
-# Safe parsing of optional mode argument.
-# Usage: python simulate.py [DIRECT|GUI]
-if len(sys.argv) > 1:
-	directOrGUI = str(sys.argv[1]).upper()
+# Accept either:
+#   python simulate.py <DIRECT|GUI> <solutionID>
+# or
+#   python simulate.py <DIRECT|GUI>
+# or no args at all. Provide safe defaults.
+args = sys.argv[1:]
+
+if len(args) >= 1:
+	directOrGUI = args[0].upper()
 else:
 	directOrGUI = 'GUI'
 
@@ -14,78 +18,18 @@ if directOrGUI in ("D", "HEADLESS", "1", "TRUE"):
 elif directOrGUI in ("G", "WINDOW", "0", "FALSE"):
 	directOrGUI = "GUI"
 elif directOrGUI not in ("DIRECT", "GUI"):
-	# Unknown value -> fallback to GUI
 	directOrGUI = "GUI"
 
-print(f"Starting simulation: mode={directOrGUI}")
+if len(args) >= 2:
+	solutionID = args[1]
+else:
+	# Some callers don't use solutionID; default to '0'
+	solutionID = '0'
 
-simulation = SIMULATION(directOrGUI)
+print(f"Starting simulation: mode={directOrGUI}, id={solutionID}")
+
+simulation = SIMULATION(directOrGUI, solutionID)
 simulation.Run()
 simulation.Get_Fitness()
-
-# import constants as c
-# import numpy as np
-# import pybullet as p
-# import pybullet_data
-# import pyrosim.pyrosim as pyrosim
-# import time
-# import math
-# import random
-
-# backLegAmplitude = c.backLegAmplitude
-# backLegFrequency = c.backLegFrequency
-# backLegPhaseOffset = c.backLegPhaseOffset
-
-# frontLegAmplitude = c.frontLegAmplitude
-# frontLegFrequency = c.frontLegFrequency
-# frontLegPhaseOffset = c.frontLegPhaseOffset
-
-# physicsClient = p.connect(p.GUI)
-# p.setAdditionalSearchPath(pybullet_data.getDataPath())
-# p.setGravity(0, 0, -9.8)
-
-# planeId = p.loadURDF("plane.urdf")
-# robotId = p.loadURDF("body.urdf")
-# p.loadSDF("world.sdf")
-
-# pyrosim.Prepare_To_Simulate(robotId)
-# backLegSensorValues = np.zeros(1000)
-# frontLegSensorValues = np.zeros(1000)
-# targetValues = np.linspace(0, 2*np.pi, 1000)
-# frontTargetAngles = frontLegAmplitude * \
-# np.sin(frontLegFrequency * (targetValues + frontLegPhaseOffset))
-# backTargetAngles = backLegAmplitude * \
-# np.sin(backLegFrequency * (targetValues + backLegPhaseOffset))
-
-# # exit()
-
-
-# for x in range(1000):
-#     time.sleep(1/60)
-#     p.stepSimulation()
-#     backLegSensorValues[x] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
-#     frontLegSensorValues[x] = pyrosim.Get_Touch_Sensor_Value_For_Link(
-#         "FrontLeg")
-
-#     pyrosim.Set_Motor_For_Joint(
-#         bodyIndex=robotId,
-#         jointName='Torso_BackLeg',
-#         controlMode=p.POSITION_CONTROL,
-#         targetPosition=backTargetAngles[x],
-#         maxForce=c.force
-#     )
-#     pyrosim.Set_Motor_For_Joint(
-#         bodyIndex=robotId,
-#         jointName='Torso_FrontLeg',
-#         controlMode=p.POSITION_CONTROL,
-#         targetPosition=frontTargetAngles[x],
-#         maxForce=c.force
-#     )
-
-# np.save('data/backLegSensorValues', backLegSensorValues)
-# np.save('data/frontLegSensorValues', frontLegSensorValues)
-# np.save('data/frontTargetAngles', frontTargetAngles)
-# np.save('data/backTargetAngles', backTargetAngles)
-
-# p.disconnect()
-# print(backLegSensorValues)
+simulation.Run()
+simulation.Get_Fitness()
